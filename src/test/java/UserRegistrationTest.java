@@ -29,7 +29,7 @@ public class UserRegistrationTest {
     }
 
     @Test
-    public void mobileTestInvalid(){
+    public void mobileTestInvalid() {
         Assert.assertFalse(UserRegistration.checkMobile("91 98 74311017"));
         Assert.assertFalse(UserRegistration.checkMobile("919 874311017"));
         Assert.assertFalse(UserRegistration.checkMobile("A91 9874311017"));
@@ -37,21 +37,22 @@ public class UserRegistrationTest {
     }
 
     @Test
-    public void passwordTestValid(){
+    public void passwordTestValid() {
         Assert.assertTrue(UserRegistration.checkPassword("iMhQhPE8#"));
     }
 
     @Test
-    public void passwordTestInvalid1(){
+    public void passwordTestInvalid1() {
         Assert.assertFalse(UserRegistration.checkPassword("@iMhQhPE8#"));//spl. chracters exactly once
     }
 
     @Test
-    public void passwordTestInvalid2(){
+    public void passwordTestInvalid2() {
         Assert.assertFalse(UserRegistration.checkPassword("ihPE8#"));
     }
+
     @Test
-    public void passwordTestInvalid3(){
+    public void passwordTestInvalid3() {
         Assert.assertFalse(UserRegistration.checkPassword("abcdeghyierf&"));
     }
 
