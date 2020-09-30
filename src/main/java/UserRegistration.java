@@ -1,7 +1,13 @@
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UserRegistration {
+    private static String firstName;
+    private static String lastName;
+    private static String email;
+    private static String mobile;
+    private static String password;
 
     public static boolean checkName(String name) {
         String pattern = "[A-Z][a-z]{2,}";
@@ -30,9 +36,74 @@ public class UserRegistration {
                 (splCharCount == 1);
     }
 
+    public static String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) throws IllegalFieldValueException {
+        if (!checkName(firstName))
+            throw new IllegalFieldValueException(ERROR_MESSAGE.fname);
+        UserRegistration.firstName = firstName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) throws IllegalFieldValueException {
+        if (!checkEmail(email))
+            throw new IllegalFieldValueException(ERROR_MESSAGE.email);
+        UserRegistration.email = email;
+    }
+
+    public static String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) throws IllegalFieldValueException {
+        if (!checkMobile(mobile))
+            throw new IllegalFieldValueException(ERROR_MESSAGE.mobile);
+        UserRegistration.mobile = mobile;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) throws IllegalFieldValueException {
+        if (!checkPassword(password))
+            throw new IllegalFieldValueException(ERROR_MESSAGE.password);
+        UserRegistration.password = password;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) throws IllegalFieldValueException {
+        if (!checkName(lastName))
+            throw new IllegalFieldValueException(ERROR_MESSAGE.lname);
+        UserRegistration.lastName = lastName;
+    }
+
     public static void main(String[] args) {
-        checkEmail("abc.xyz@mnc.com");
-        System.out.println(checkMobile("1A 8961749717"));
+        UserRegistration user = new UserRegistration();
+        try (Scanner sc = new Scanner(System.in)) {
+            System.out.println("Enter first name:");
+            user.setFirstName(sc.nextLine());
+            System.out.println("Enter last name:");
+
+            user.setLastName(sc.nextLine());
+            System.out.println("Enter Email id:");
+            user.setEmail(sc.nextLine());
+            System.out.println("Enter mobile number:");
+            user.setMobile(sc.nextLine());
+            System.out.println("Enter password:");
+            user.setPassword(sc.nextLine());
+
+        } catch (IllegalFieldValueException e) {
+            e.printStackTrace();
+        }
     }
 }
 
