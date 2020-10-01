@@ -1,10 +1,23 @@
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
 public class UserRegistrationTest {
+    public UserRegistration user;
+
+    @Before
+    public void initializeTest() {
+        user = new UserRegistration();
+    }
+
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
+
     @Test
     public void checkNameTest() {
         Assert.assertTrue(UserRegistration.checkName("Debojyoti"));
@@ -56,4 +69,38 @@ public class UserRegistrationTest {
         Assert.assertFalse(UserRegistration.checkPassword("abcdeghyierf&"));
     }
 
+    @Test
+    public void firstNameExceptionTest() throws IllegalFieldValueException {
+        exception.expect(IllegalFieldValueException.class);
+        exception.expectMessage(ERROR_MESSAGE.fname);
+        user.setFirstName("D");
+    }
+
+    @Test
+    public void lastNameExceptionTest() throws IllegalFieldValueException {
+        exception.expect(IllegalFieldValueException.class);
+        exception.expectMessage(ERROR_MESSAGE.lname);
+        user.setLastName("m");
+    }
+
+    @Test
+    public void emailExceptionTest() throws IllegalFieldValueException {
+        exception.expect(IllegalFieldValueException.class);
+        exception.expectMessage(ERROR_MESSAGE.email);
+        user.setEmail("dmukh.work@.");
+    }
+
+    @Test
+    public void mobileExceptionTest() throws IllegalFieldValueException {
+        exception.expect(IllegalFieldValueException.class);
+        exception.expectMessage(ERROR_MESSAGE.mobile);
+        user.setMobile("5456678");
+    }
+
+    @Test
+    public void passwordExceptionTest() throws IllegalFieldValueException {
+        exception.expect(IllegalFieldValueException.class);
+        exception.expectMessage(ERROR_MESSAGE.password);
+        user.setPassword("abcdefghijklmn");
+    }
 }
